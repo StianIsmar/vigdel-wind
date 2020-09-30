@@ -12,6 +12,7 @@
   "dependencies": {
     "@hapi/hapi": "^20.0.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-tools": "^8.11.0",
     "mssql": "^6.2.3",

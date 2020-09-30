@@ -1,4 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useDispatch, useSelector } from 'react-redux'
+
+import {getWindFromApi} from './actions/windActions'
+
 import { Button, Card, Typography, Icon} from "@equinor/eds-core-react";
 import './styles/App.css'
 import {
@@ -11,6 +15,10 @@ Icon.add({ more_verticle });
 
 
 const App = () => {
+  const wind = useSelector(state => {return state.windReducer.windData})
+  const dispatch = useDispatch();
+  useEffect(()=>{dispatch((getWindFromApi()))},[])
+
   return (
     <>
       <Global />

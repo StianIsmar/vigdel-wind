@@ -1,7 +1,12 @@
 "use strict";
 
+const cors = require('cors');
+
+
 var express = require("express");
 var app = express();
+app.use(cors())
+
 var { getWindForecast, storeWindData } = require("./kystScrape");
 
 var { getWind } = require('./getWind')

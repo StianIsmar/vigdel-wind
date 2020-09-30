@@ -25,10 +25,8 @@ const scrapeAPI = async (url) => {
 const storeWindData = (req, res, next) => {
   // parse data
   const time = req.time
-  console.log(time)
   const windSpeed = req.result[1]["Value"]["Value"].toString()
-  console.log(windSpeed)
-  console.log(req.result[1])
+  const windDir = req.result[0]["Value"]["Value"].toString()
   //console.log("WINDSPEED", windSpeed)
   //console.log("req.time", req.time.toString())
 
@@ -40,7 +38,7 @@ const storeWindData = (req, res, next) => {
     var request = new sql.Request();
     // request.query('SELECT TOP (1000) * FROM wind', function (err, recordset) {
   
-    const sqlQuery = `INSERT INTO wind (RecordedTime,WindDirection,WindStrength) \n VALUES ('${time}', 'NNW', '${windSpeed}')`
+    const sqlQuery = `INSERT INTO wind (RecordedTime,WindDirection,WindStrength) \n VALUES ('${time}', '${windDir}', '${windSpeed}')`
 
     request.query(sqlQuery, function (err, recordset) {
 
