@@ -7,9 +7,10 @@ var express = require("express");
 var app = express();
 app.use(cors())
 
-var { getWindForecast, storeWindData } = require("./kystScrape");
+var { getWindForecast, storeWindData } = require("./storeDataToDb");
 
 var { getWind } = require('./getWind')
+var {scrapeCurrentWind} = require('./getCurrentWind')
 
 app.get("/readwind", startCalls, getWindForecast, storeWindData);
 
@@ -24,6 +25,10 @@ function startCalls(req, res, next) {
 };
 
 app.get("/getwind", getWind);
+
+
+
+app.get("/getcurrentwind", scrapeCurrentWind);
 
 
 app.listen(3002, () => {

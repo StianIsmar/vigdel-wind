@@ -27,6 +27,11 @@ const storeWindData = (req, res, next) => {
   const time = req.time
   const windSpeed = req.result[1]["Value"]["Value"].toString()
   const windDir = req.result[0]["Value"]["Value"].toString()
+
+  if(req.updatedSpeed){
+    console.log("req.updatedSpeed IS NOW TRUE")
+  }
+
   //console.log("WINDSPEED", windSpeed)
   //console.log("req.time", req.time.toString())
 
@@ -66,6 +71,7 @@ const getWindForecast = (req, res, next) => {
 
       const time = getTime()
       req.time = time
+      req.updatedSpeed = false
 
       if (windRecordings.length > 0) {
         // A wind value(s) is already pushed to the list
@@ -83,7 +89,8 @@ const getWindForecast = (req, res, next) => {
           windRecordings.push(result);
           //req.result = result
 
-          // storeWindData(res) // store in DB
+          // storeWindData() // store in DB
+          req.updatedSpeed = true
           next()
 
         }
