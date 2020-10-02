@@ -7,15 +7,19 @@ var express = require("express");
 var app = express();
 app.use(cors())
 
+var { scrapeCurrentWind, scrapeCurrentWaves } = require('./getCurrentWind')
+
 var { getWindForecast, storeWindData } = require("./storeDataToDb");
 
 var { getWind } = require('./getWind')
-var {scrapeCurrentWind} = require('./getCurrentWind')
 
+app.get("/getcurrentwind", scrapeCurrentWind);
+app.get("/getcurrentwaves", scrapeCurrentWaves);
+
+// the endpoint underneath are not used
 app.get("/readwind", startCalls, getWindForecast, storeWindData);
 
 function startCalls(req, res, next) {
-  // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
   try {
     next()
 
@@ -28,7 +32,6 @@ app.get("/getwind", getWind);
 
 
 
-app.get("/getcurrentwind", scrapeCurrentWind);
 
 
 app.listen(3002, () => {
