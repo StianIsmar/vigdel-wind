@@ -7,14 +7,14 @@ var express = require("express");
 var app = express();
 app.use(cors())
 
-var { scrapeCurrentWind, scrapeCurrentWaves } = require('./getCurrentWind')
+var { scrapeCurrentWind } = require('./getCurrentWind')
+var {scrapeAPI} =require('./scrape')
 
 var { getWindForecast, storeWindData } = require("./storeDataToDb");
 
 var { getWind } = require('./getWind')
 
-app.get("/getcurrentwind", scrapeCurrentWind);
-app.get("/getcurrentwaves", scrapeCurrentWaves);
+app.get("/getcurrentwind", scrapeCurrentWind, scrapeAPI);
 
 // the endpoint underneath are not used
 app.get("/readwind", startCalls, getWindForecast, storeWindData);

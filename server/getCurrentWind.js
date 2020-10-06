@@ -1,19 +1,11 @@
 const { scrapeAPI, scrapeMsw } = require('./scrape')
 var { getTime } = require("./Time")
 
-const scrapeCurrentWind = (req, res) => {
-    const instantWind = scrapeAPI(
-        "http://mobvaer.kystverket.no/v2/api/stations/5265049",
-        "https://magicseaweed.com/Bore-Surf-Report/1886/"
-    );
-    instantWind.then((result) => {
-        const time = getTime()
-        const windSpeed = result[1]["Value"]["Value"].toString()
-        const windDir = result[0]["Value"]["Value"].toString()
-        const reponse = { currentwind: { 'time': time, 'windSpeed': windSpeed, 'windDir': windDir } }
-        return res.send(reponse)
-    });
-
+const scrapeCurrentWind = async (req, res, then) => {
+    req.scrapeUrls = ["http://mobvaer.kystverket.no/v2/api/stations/5265049",
+    "https://magicseaweed.com/Bore-Surf-Report/1886/"]
+    then()
+    
 }
 const scrapeCurrentWaves = (req, res) => {
     const instantWaves = scrapeMsw('https://magicseaweed.com/Bore-Surf-Report/1886/'
