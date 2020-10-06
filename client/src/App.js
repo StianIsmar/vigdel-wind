@@ -2,13 +2,15 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux'
 
 import {getWindFromApi} from './actions/windActions'
+import GraphComp from './components/GraphComp'
+
 
 import { Button, Card, Typography, Icon} from "@equinor/eds-core-react";
 import './styles/App.css'
 import {
     more_verticle
 } from "@equinor/eds-icons";
-import { Global } from "./styles/styles";
+import { Global, Wrapper } from "./styles/styles";
 
 Icon.add({ more_verticle });
 
@@ -22,9 +24,10 @@ const App = () => {
   return (
     <>
       <Global />
-      <div>
+      <Wrapper>
+        <GraphComp/>
         <Button variant="outlined" color="secondary">
-          This is the button
+          Update wind data 
         </Button>
         <Card>
           <Card.CardHeader>
@@ -37,7 +40,7 @@ const App = () => {
             </Button>
           </Card.CardHeader>
         </Card>
-      </div>
+      </Wrapper>
     </>
   );
 };

@@ -20,4 +20,8 @@ const Global = createGlobalStyle`
   }
 `;
 
-export { Global };
+const Wrapper = styled.div`
+width:50%`
+
+
+export { Global, Wrapper };
