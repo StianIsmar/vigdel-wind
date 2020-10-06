@@ -1,47 +1,40 @@
-import React, {useEffect} from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Animation from "./components/Animation";
+import WaveAnimation from "./components/WaveAnimation";
+import BeachAnimation from "./components/BeachAnimation";
 
-import {getWindFromApi} from './actions/windActions'
-import GraphComp from './components/GraphComp'
+import { getWindFromApi } from "./actions/windActions";
 
-
-import { Button, Card, Typography, Icon} from "@equinor/eds-core-react";
-import './styles/App.css'
-import {
-    more_verticle
-} from "@equinor/eds-icons";
-import { Global, Wrapper } from "./styles/styles";
+import { Button, Card, Typography, Icon } from "@equinor/eds-core-react";
+import "./styles/App.css";
+import { more_verticle } from "@equinor/eds-icons";
+import { Global, SvgDiv, BottomSvg, BeachDiv } from "./styles/styles";
 
 Icon.add({ more_verticle });
 
-
-
 const App = () => {
-  const wind = useSelector(state => {return state.windReducer.windData})
+  const wind = useSelector((state) => {
+    return state.windReducer.windData;
+  });
   const dispatch = useDispatch();
-  useEffect(()=>{dispatch((getWindFromApi()))},[])
+  useEffect(() => {
+    dispatch(getWindFromApi());
+  }, []);
 
   return (
-    <>
+    <React.Fragment>
       <Global />
-      <Wrapper>
-        <GraphComp/>
-        <Button variant="outlined" color="secondary">
-          Update wind data 
-        </Button>
-        <Card>
-          <Card.CardHeader>
-            <Card.CardHeaderTitle>
-              <Typography variant="overline">Overline</Typography>
-              <Typography variant="h6">Title goes here</Typography>
-            </Card.CardHeaderTitle>
-            <Button variant="ghost_icon">
-              <Icon name="more_verticle" title="more action" size={48}></Icon>
-            </Button>
-          </Card.CardHeader>
-        </Card>
-      </Wrapper>
-    </>
+      <SvgDiv>
+        <Animation />
+      </SvgDiv>
+      <BeachDiv>
+        <BeachAnimation />
+      </BeachDiv>
+      <BottomSvg>
+        <WaveAnimation />
+      </BottomSvg>
+    </React.Fragment>
   );
 };
 
