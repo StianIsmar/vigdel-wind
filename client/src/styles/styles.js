@@ -25,6 +25,8 @@ const SvgDiv = styled.div`
   width: 100%;
   background-color: #8bd8f3;
   height: 70%;
+  position: relative;
+  z-index:0;
 `;
 const BeachDiv = styled.div`
   width: 100%;

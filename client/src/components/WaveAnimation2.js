@@ -18,14 +18,14 @@ import {
 
 const WaveAnimation2 = () => {
 
-  
-  const mswData = useSelector(state => {return state.swellReducer.swellData})
+
+  const mswData = useSelector(state => { return state.swellReducer.swellData })
 
   return (
     <div className="ocean-div">
 
-      <div class="ocean">
-        <div class="wave"></div>
+      <div class="ocean" style={{ 'zIndex': 0 }}>
+        <div class="wave" ></div>
         <div class="wave"></div>
         <TemperatureSection>
 

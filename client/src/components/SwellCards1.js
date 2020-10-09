@@ -120,7 +120,13 @@ const SwellCards1 = (props) => {
     }
 
     const renderPrimarySwell = () => {
-        return <ColumnElement>{props.data.swell.components.primary.height + "m"}{" | "}{props.data.swell.components.primary.period + "s"}{" | "}
+        var cow = ''
+        if (props.data.swell.components.primary.height > 1.5){
+            cow = '🐮';
+        }
+        
+
+        return <ColumnElement>{cow + ' '+ props.data.swell.components.primary.height + "m"}{" | "}{props.data.swell.components.primary.period + "s"}{" | "}
             <ArrowRightAltIcon style={{ 'transformOrigin': 'center', 'transform': `rotate(${props.data.swell.components.primary.direction - 90 + "deg"})` }} />
         </ColumnElement>
     }

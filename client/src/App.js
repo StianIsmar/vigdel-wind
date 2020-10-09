@@ -43,7 +43,3 @@ const App = () => {
 export default App;
 
 
-
-/*      <BeachDiv>
-        <BeachAnimation />
-      </BeachDiv>*/

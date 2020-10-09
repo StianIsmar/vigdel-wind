@@ -106,7 +106,7 @@ const Animation = () => {
         <ul style={{ 'listStyleType': 'none', 'padding': '0px' }}>
           <li>
             <OuterDiv>
-              <Grid container style={{'color':'white'}}>
+              <Grid container style={{'color':'white' }}>
                 <Grid item xs={3}>
                   <SwellTimeElement>
 
