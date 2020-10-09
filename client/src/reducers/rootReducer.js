@@ -1,5 +1,5 @@
 import {createStore, combineReducers} from 'redux';  
-import windReducer from './windReducer'
+import swellReducer from './swellReducer'
 
 export default combineReducers({
-    windReducer})  
+    swellReducer})  

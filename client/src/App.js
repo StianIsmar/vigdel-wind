@@ -1,41 +1,46 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Animation from "./components/Animation";
-import WaveAnimation from "./components/WaveAnimation";
+import WaveAnimation2 from "./components/WaveAnimation2";
 import BeachAnimation from "./components/BeachAnimation";
-
-import { getWindFromApi } from "./actions/windActions";
+import { getSwellFromApi } from "./actions/windActions";
 
 import { Button, Card, Typography, Icon } from "@equinor/eds-core-react";
 import "./styles/App.css";
 import { more_verticle } from "@equinor/eds-icons";
-import { Global, SvgDiv, BottomSvg, BeachDiv } from "./styles/styles";
+import { Global, SvgDiv, BottomSvg, BeachDiv,StyledH1 } from "./styles/styles";
 
 Icon.add({ more_verticle });
 
 const App = () => {
-  const wind = useSelector((state) => {
-    return state.windReducer.windData;
+  const swell = useSelector((state) => {
+    return state.swellReducer.swellData;
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getWindFromApi());
+    dispatch(getSwellFromApi());
   }, []);
 
   return (
-    <React.Fragment>
+    <>
+      
       <Global />
       <SvgDiv>
+      <StyledH1>Bølgevarsel Bore</StyledH1>
         <Animation />
       </SvgDiv>
-      <BeachDiv>
-        <BeachAnimation />
-      </BeachDiv>
+
       <BottomSvg>
-        <WaveAnimation />
+        <WaveAnimation2 />
       </BottomSvg>
-    </React.Fragment>
+    </>
   );
 };
 
 export default App;
+
+
+
+/*      <BeachDiv>
+        <BeachAnimation />
+      </BeachDiv>*/
