@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { ArrowDiv, CardDiv, OuterDiv, ColumnElement } from '../styles/styles'
+import { ArrowDiv, CardDiv, OuterDiv, ColumnElement, SwellTimeElement } from '../styles/styles'
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -58,12 +58,21 @@ const useStyles1 = makeStyles({
         marginBottom: 12,
     },
 });
+
+
+const nearestValue1 = (arr, val) => {
+    for (var i = 0; i < arr.length; i++) {
+        if (val <= arr[i]) {
+            return arr[i]
+        }
+    }
+}
 const nearestValue = (arr, val) => arr.reduce((p, n) => (Math.abs(p) > Math.abs(n - val) ? n - val : p), Infinity) + val
 
 const getCorrespondingWind = (date, windData) => {
     const mswEpoch = moment(date).valueOf() // need to find the closest value to this from the yr object
     const times = windData.map(v => v.time_epoch)
-    const nearests = (nearestValue(times, mswEpoch))
+    const nearests = (nearestValue1(times, mswEpoch))
     return windData.find(x => x.time_epoch === nearests)
 }
 
@@ -73,7 +82,7 @@ const SwellCards1 = (props) => {
 
     const [cardWind, setYrWindObj] = useState(10 + 'm/s') // holds the wind from yr
 
-    
+
 
     const handleChange = (event) => {
         setSpacing(Number(event.target.value));
@@ -82,11 +91,11 @@ const SwellCards1 = (props) => {
     const classes1 = useStyles1();
     const bull = <span className={classes.bullet}>•</span>;
     const data = props.data
-    
+
     function closest(arr, val) {
         const mapped = arr.map(v => v.time_epoch)
         return Math.max.apply(null, mapped.filter(function (v) { return v <= val }))
-      }
+    }
 
     const findClosest = (arr, v) => {
         arr.sort((a, b) => {
@@ -95,9 +104,8 @@ const SwellCards1 = (props) => {
     }
 
     const getCurrentDate = () => {
-        // console.log(props.data.localTimestamp)
         const d = new Date(props.data.localTimestamp * 1000)
-        
+
 
         if (d.getHours().toString().length == 1) {
             return "0" + d.getHours() + ":00"
@@ -119,22 +127,28 @@ const SwellCards1 = (props) => {
 
     const renderYrWind = () => {
         const d = new Date(props.data.localTimestamp * 1000)
-        const closestYrObj = getCorrespondingWind(d,props.yrData)
-        console.log(closestYrObj)
+        const closestYrObj = getCorrespondingWind(d, props.yrData)
+        console.log(d, closestYrObj)
+        return <ColumnElement>
+            {closestYrObj.speed}<ArrowRightAltIcon style={{ 'transformOrigin': 'center', 'transform': `rotate(${closestYrObj.direction - 90+180 + "deg"})` }}></ArrowRightAltIcon> </ColumnElement>
+
 
         //return closestYrObj.speed
-
     }
     return (
         <li>
             <OuterDiv>
-                <Grid container container justify="center">
-                    <Grid item xs={2}>
-                        <ColumnElement>
-                            {getCurrentDate()}
-                        </ColumnElement>
+                <Grid container>
+                    <Grid item xs={3}>
+                        <SwellTimeElement>
+
+                            <ColumnElement>
+                                {getCurrentDate()}
+
+                            </ColumnElement>
+                        </SwellTimeElement>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         {renderPrimarySwell()}
                     </Grid>
                     <Grid item xs={3}>
@@ -142,44 +156,10 @@ const SwellCards1 = (props) => {
                         ) : (<ColumnElement>-</ColumnElement>)}
                     </Grid>
                     <Grid item xs={3}>
-                        <ColumnElement>
-                            {renderYrWind()}
-                        </ColumnElement>
+                        {renderYrWind()}
                     </Grid>
                 </Grid>
             </OuterDiv>
         </li>)
 }
 export default SwellCards1;
-
-
-
-/*
-         <li>
-            <OuterDiv>
-                <ColumnElement>
-                {getCurrentDate()}
-
-            </ColumnElement>
-                <ColumnElement>{props.data.swell.components.primary.height + "m"}{" | "}{props.data.swell.components.primary.period + "s"}{" | "}
-                    <ArrowRightAltIcon style={{ 'transform': `rotate(${props.data.swell.components.primary.direction - 90 + "deg"})` }} /></ColumnElement>
-                <ColumnElement>                {props.data.swell.components.hasOwnProperty('secondary') ? (renderSecondarySwell()
-
-) : (<CardDiv>-</CardDiv>)}</ColumnElement>
-            </OuterDiv>
-
-*/
-
-/*
-<OuterDiv>
-    <ColumnElement>
-        {getCurrentDate()}
-    </ColumnElement>
-
-    {renderPrimarySwell()}
-
-    {props.data.swell.components.hasOwnProperty('secondary') ? (renderSecondarySwell()
-
-    ) : (<ColumnElement>-</ColumnElement>)}
-</OuterDiv>
-*/

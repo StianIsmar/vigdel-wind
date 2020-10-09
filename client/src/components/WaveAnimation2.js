@@ -37,10 +37,7 @@ const WaveAnimation2 = () => {
             />
             <h2>16°C</h2>
           </WaterTemp>
-          <SurfInfo>
-            <WavesIcon fontSize="large" style={{ color: "orange" }} />
-            <div>1.2 m</div>
-          </SurfInfo>
+
         </TemperatureSection>
 
       </div>

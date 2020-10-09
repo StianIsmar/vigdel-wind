@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NumberDiv } from '../styles/styles'
 const ColumnDiv = styled.div`
-display: flex;
-flex-direction: row;
-font-size:40px !important;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    font-size:40px !important;
 `;
 const Time = (props) => {
     const [currentTime, updateCurrentTime] = useState(new Date());

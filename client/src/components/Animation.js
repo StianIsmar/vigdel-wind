@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { select } from "d3";
 import SwellCards from './SwellCards1'
 import { useSelector } from "react-redux";
+import { ArrowDiv, CardDiv, OuterDiv, ColumnElement, SwellTimeElement } from '../styles/styles'
+import Grid from '@material-ui/core/Grid';
 
-
-import Time from './Time'
 
 import "./WaveAmimation2.css"
 import CloudIcon from "@material-ui/icons/Cloud";
@@ -50,14 +50,13 @@ const Animation = () => {
   }
 
 
-  const performFiltering =  () => {
+  const performFiltering = () => {
     var d = new Date();
     const todayUtc = d.getTime()
 
     const filteredData = mswData.filter(x => (todayUtc - 1000000) <= (x.localTimestamp * 1000));
-    
-    //console.log(mswData.length - filteredData.length -1)
-    //filteredData.unshift(mswData[mswData.length - filteredData.length -1])
+
+
     return filteredData.slice(0, 8)
   }
 
@@ -97,17 +96,42 @@ const Animation = () => {
   return (
     <div ref={divRef}>
       <TemperatureSection>
-        <Time />
         <AirTemp>
           <CloudIcon color="primary" fontSize="large" style={{ color: "orange" }} />
-          <h2>14°C</h2>
+          <h2>16°C</h2>
         </AirTemp>
       </TemperatureSection>
-
-
       <ListDiv>
-        <div>Primary Swell ** Secondary Swell</div>
-        <ul style={{ 'listStyleType': 'none','padding':'0px' }}>
+
+        <ul style={{ 'listStyleType': 'none', 'padding': '0px' }}>
+          <li>
+            <OuterDiv>
+              <Grid container style={{'color':'white'}}>
+                <Grid item xs={3}>
+                  <SwellTimeElement>
+
+                    <ColumnElement>
+                      Time
+                            </ColumnElement>
+                  </SwellTimeElement>
+
+                </Grid>
+                <Grid item xs={3}>
+                  <ColumnElement>
+                  🌊 Primary swell
+                            </ColumnElement>                   </Grid>
+                <Grid item xs={3}>
+                  <ColumnElement>
+                  🌊 Secondary Swell
+                            </ColumnElement>
+                </Grid>
+                <Grid item xs={3}>
+                  <ColumnElement>
+                  💨 Yr wind (Feisten Fyr) [m/s]
+                            </ColumnElement>                   </Grid>
+              </Grid>
+            </OuterDiv>
+          </li>
           {console.log(filteredData)}
           {
             filteredData !== null &&
@@ -120,11 +144,3 @@ const Animation = () => {
 };
 
 export default Animation;
-
-
-/*
-      <svg width="100%" height="100%" preserveAspectRatio="none" ref={svgRef}>
-        <circle />
-        <circle />
-      </svg>
-*/

@@ -4,15 +4,18 @@ import Animation from "./components/Animation";
 import WaveAnimation2 from "./components/WaveAnimation2";
 import BeachAnimation from "./components/BeachAnimation";
 import { getSwellFromApi } from "./actions/windActions";
+import Time from './components/Time'
 
 import { Button, Card, Typography, Icon } from "@equinor/eds-core-react";
 import "./styles/App.css";
 import { more_verticle } from "@equinor/eds-icons";
-import { Global, SvgDiv, BottomSvg, BeachDiv,StyledH1 } from "./styles/styles";
+import { Global, SvgDiv, BottomSvg, BeachDiv, StyledH1 } from "./styles/styles";
 
 Icon.add({ more_verticle });
 
 const App = () => {
+  var mswData = useSelector(state => { return state.swellReducer.swellData })
+
   const swell = useSelector((state) => {
     return state.swellReducer.swellData;
   });
@@ -23,10 +26,10 @@ const App = () => {
 
   return (
     <>
-      
       <Global />
       <SvgDiv>
-      <StyledH1>Bølgevarsel Bore</StyledH1>
+        <Time />
+        <StyledH1>Bølgevarsel Bore</StyledH1>
         <Animation />
       </SvgDiv>
 

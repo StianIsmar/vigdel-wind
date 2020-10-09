@@ -10,7 +10,7 @@ const Global = createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 100%;
+    width: 100vw;
     overflow: hidden; 
     user-select: none;
     background-color: #eaeaea;
@@ -38,8 +38,8 @@ const BottomSvg = styled.div`
   width: 100%;
   background-color: #015871;
   height: 30%;
-  background: linear-gradient(to top, #479EB1 1%,#479EB1 70%,#015871 100%); 
-  overflow-y: hidden !important; 
+  background: linear-gradient(to top, #015871 1%,#479EB1 70%,#015871 100%); 
+  --overflow-y: hidden !important; 
 
 `;
 
@@ -50,7 +50,12 @@ const TemperatureSection = styled.div`
   justify-content: space-evenly;
   color:orange;
 `;
-const AirTemp = styled.div``;
+const AirTemp = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`;
 const WaterTemp = styled.div`
 `;
 const SurfInfo = styled.div`
@@ -80,7 +85,7 @@ const OuterDiv = styled.div`
   text-align:center;
   align-items: center;
   flex-direction: row;
-  background-color: #333;
+  background-color: #2E2E3A;
   margin-bottom: 8px;
   min-width: 275;
   border-radius:4px;
@@ -92,15 +97,13 @@ const OuterDiv = styled.div`
 
 `
 const ColumnElement = styled.div`
-display:flex
-  --margin:12px;
+  display:flex;
   font-size: 22px;
-
-
-
 `
 
-
+const SwellTimeElement = styled.div`
+  margin-left:40px;
+`
 
 const ListDiv = styled.div`
 
@@ -123,6 +126,7 @@ display: flex;
 align-items: center;
 justify-content:center;
 font-size:50px !important;
+color:#2E2E3A;
 `
 
 
@@ -135,5 +139,5 @@ export {
   AirTemp,
   WaterTemp,
   SurfInfo,
-  BeachDiv, NumberDiv, ArrowDiv, CardDiv, OuterDiv, ListDiv, StyledH1,ColumnElement
+  BeachDiv, NumberDiv, ArrowDiv, CardDiv, OuterDiv, ListDiv, StyledH1,ColumnElement,SwellTimeElement
 };
