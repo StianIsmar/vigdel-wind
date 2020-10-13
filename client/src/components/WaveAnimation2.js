@@ -24,7 +24,7 @@ const WaveAnimation2 = () => {
   return (
     <div className="ocean-div">
 
-      <div class="ocean" style={{ 'zIndex': 0 }}>
+      <div class="ocean" style={{ 'zIndex': 0,'bottom':'-350px' }}>
         <div class="wave" ></div>
         <div class="wave"></div>
         <TemperatureSection>

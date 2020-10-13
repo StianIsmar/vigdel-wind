@@ -4,6 +4,7 @@ import SwellCards from './SwellCards1'
 import { useSelector } from "react-redux";
 import { ArrowDiv, CardDiv, OuterDiv, ColumnElement, SwellTimeElement } from '../styles/styles'
 import Grid from '@material-ui/core/Grid';
+import WavesIcon from '@material-ui/icons/Waves';
 
 
 import "./WaveAmimation2.css"
